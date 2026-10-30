@@ -1,4 +1,22 @@
-# ⚡ FormPilot AI
+<p align="center">
+  <img src="docs/icon128.png" width="72" alt="FormPilot AI logo">
+</p>
+
+<h1 align="center">⚡ FormPilot AI</h1>
+
+<p align="center">
+  <b>Isi & submit form otomatis di Chrome/Brave — kirim Google Form berulang,<br>
+  atau isi form apa pun memakai AI dengan animasi yang bisa kamu verifikasi.</b>
+</p>
+
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/Manifest-V3-e91e63.svg" alt="Manifest V3">
+  <img src="https://img.shields.io/badge/Chrome%20%7C%20Brave-ready-4285F4.svg" alt="Chrome & Brave">
+  <img src="https://img.shields.io/badge/API%20key-bring%20your%20own-7c3aed.svg" alt="BYO API Key">
+</p>
+
+---
 
 Ekstensi browser (Manifest V3) untuk **Google Chrome** dan **Brave** yang bisa:
 
@@ -10,6 +28,17 @@ Ekstensi browser (Manifest V3) untuk **Google Chrome** dan **Brave** yang bisa:
 > disimpan **HANYA di `chrome.storage.local` browser-mu** (tidak dikirim ke
 > server mana pun selain provider AI yang kamu pilih).
 > Begitu pula data form-mu (nama, email, endpoint) — semuanya lokal.
+
+---
+
+## ✨ Preview
+
+<table>
+  <tr>
+    <td align="center"><b>Tab ⚡ Auto Submit</b><br><i>loop fetch + log live</i><br><br><img src="docs/popup-auto.png" width="330" alt="Tab Auto Submit"></td>
+    <td align="center"><b>Tab 🤖 AI Filler</b><br><i>isi form via AI + animasi</i><br><br><img src="docs/popup-ai.png" width="330" alt="Tab AI Filler"></td>
+  </tr>
+</table>
 
 ---
 
@@ -56,6 +85,8 @@ Ekstensi browser (Manifest V3) untuk **Google Chrome** dan **Brave** yang bisa:
 ├── options.html     # Halaman pengaturan AI lanjutan
 ├── options.js
 ├── icons/           # Logo ekstensi (icon16/32/48/128.png)
+├── docs/            # Screenshot untuk README
+├── LICENSE          # Lisensi MIT
 ├── make_icons.ps1   # Script untuk regenerasi logo (opsional)
 └── README.md
 ```
@@ -197,4 +228,4 @@ document.querySelectorAll("[name^=entry.]")
 
 ## Lisensi
 
-MIT — silakan dipakai, dimodifikasi, dan dibagikan. Credits appreciated. ⚡
+[MIT](LICENSE) © 2026 Aliakbar23 — silakan dipakai, dimodifikasi, dan dibagikan. Credits appreciated. ⚡
