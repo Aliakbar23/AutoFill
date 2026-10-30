@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "FormPilot AI",
+  "version": "1.1.0",
+  "description": "Auto-submit Google Form via fetch + AI untuk mengisi form di tab aktif. Mendukung Gemini, Groq, OpenRouter, dan Ollama.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["https://docs.google.com/*", "https://forms.google.com/*"],
+  "optional_host_permissions": ["https://*/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "FormPilot AI",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page": "options.html"
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    :root {
+      --bg: #0c0d12;
+      --panel: #14161d;
+      --panel-2: #1a1d26;
+      --line: #262a36;
+      --text: #e9ebf2;
+      --muted: #8b91a3;
+      --accent: #6366f1;
+      --accent-2: #8b5cf6;
+      --grad: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      --ok: #2ecc71;
+      --warn: #f1c40f;
+      --err: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      width: 400px;
+      background: var(--bg);
+      color: var(--text);
+      font: 13px/1.5 "Segoe UI", system-ui, -apple-system, sans-serif;
+    }
+
+    /* ---------- header ---------- */
+    .head {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 16px;
+      background: var(--grad);
+    }
+    .head img { width: 26px; height: 26px; border-radius: 7px; }
+    .head .t { font-size: 15px; font-weight: 700; letter-spacing: .2px; }
+    .head .s { font-size: 10.5px; opacity: .85; margin-top: 1px; }
+
+    /* ---------- tabs ---------- */
+    .tabs {
+      display: flex; gap: 4px;
+      padding: 10px 12px 0;
+      background: var(--panel);
+      border-bottom: 1px solid var(--line);
+    }
+    .tab {
+      flex: 1; padding: 9px 6px; cursor: pointer; text-align: center;
+      font-size: 12px; font-weight: 600; color: var(--muted);
+      border: 1px solid transparent; border-bottom: none;
+      border-radius: 8px 8px 0 0; user-select: none;
+      transition: color .15s, background .15s;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active {
+      color: var(--text); background: var(--bg);
+      border-color: var(--line);
+    }
+
+    /* ---------- content ---------- */
+    section { display: none; padding: 16px; }
+    section.active { display: block; }
+
+    label {
+      display: block; font-size: 11px; font-weight: 600;
+      color: var(--muted); margin: 14px 0 5px; text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+    label:first-child { margin-top: 0; }
+
+    input[type=text], input[type=password], textarea, select {
+      width: 100%; background: var(--panel-2); color: var(--text);
+      border: 1px solid var(--line); border-radius: 9px;
+      padding: 9px 11px; font: inherit; outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(99,102,241,.18);
+    }
+    textarea { min-height: 66px; resize: vertical; }
+    select { cursor: pointer; }
+
+    .hint { font-size: 10.5px; color: var(--muted); margin-top: 5px; }
+
+    /* ---------- buttons ---------- */
+    .row { display: flex; gap: 8px; margin-top: 14px; }
+    button {
+      flex: 1; padding: 10px; border: none; border-radius: 9px;
+      cursor: pointer; font: inherit; font-weight: 700; color: #fff;
+      background: var(--grad);
+      transition: filter .15s, transform .05s, opacity .15s;
+    }
+    button:hover { filter: brightness(1.1); }
+    button:active { transform: translateY(1px); }
+    button:disabled { opacity: .4; cursor: not-allowed; filter: none; }
+    button.ghost {
+      background: var(--panel-2); color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    /* ---------- checkbox ---------- */
+    .check {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 12px; color: var(--muted); font-size: 12px;
+      text-transform: none; letter-spacing: 0; font-weight: 400;
+    }
+    .check input { width: auto; accent-color: var(--accent); }
+
+    /* ---------- log ---------- */
+    .log {
+      margin-top: 14px; max-height: 230px; overflow-y: auto;
+      background: #08090d; border: 1px solid var(--line); border-radius: 9px;
+      padding: 9px 11px; font-family: Consolas, "SF Mono", monospace;
+      font-size: 11px; line-height: 1.65; white-space: pre-wrap; word-break: break-word;
+    }
+    .log:empty::after { content: "Log akan muncul di sini…"; color: #4a5060; }
+    .log .ok { color: var(--ok); }
+    .log .warn { color: var(--warn); }
+    .log .err { color: var(--err); }
+    .log .muted { color: var(--muted); }
+
+    .summary {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--panel-2); border: 1px solid var(--line);
+      border-radius: 9px; padding: 9px 11px;
+      font-size: 11px; color: var(--muted); word-break: break-all;
+    }
+    .summary .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--ok); flex-shrink: 0;
+    }
+    a { color: var(--accent-2); }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+  </style>
+</head>
+<body>
+
+  <div class="head">
+    <img src="icons/icon48.png" alt="logo" />
+    <div>
+      <div class="t">FormPilot AI</div>
+      <div class="s">Auto-submit &amp; pengisi form berbantuan AI</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="auto">⚡ Auto Submit</div>
+    <div class="tab" data-tab="ai">🤖 AI Filler</div>
+    <div class="tab" data-tab="cfg">⚙️ Konfigurasi</div>
+  </div>
+
+  <!-- ================= TAB AUTO SUBMIT ================= -->
+  <section id="tab-auto" class="active">
+    <div class="summary"><span class="dot"></span><span id="autoSummary"></span></div>
+    <div class="row">
+      <button id="btnStart">▶️ Mulai Submit</button>
+      <button id="btnStop" class="ghost" disabled>⏹ Stop</button>
+    </div>
+    <div id="log" class="log"></div>
+  </section>
+
+  <!-- ================= TAB AI FILLER ================= -->
+  <section id="tab-ai">
+    <label for="aiPrompt">Instruksi untuk AI</label>
+    <textarea id="aiPrompt" placeholder="Contoh: isi nama Budi Santoso, email budi@example.com, usia 25-34, posisi Staff"></textarea>
+
+    <label for="aiProvider">Provider AI</label>
+    <select id="aiProvider">
+      <option value="gemini">Google Gemini — gratis ✅</option>
+      <option value="groq">Groq — gratis, super cepat ✅</option>
+      <option value="openrouter">OpenRouter — gratis (:free) ✅</option>
+      <option value="ollama">Ollama — lokal, offline ✅</option>
+      <option value="openai">OpenAI</option>
+      <option value="custom">Custom OpenAI-compatible</option>
+    </select>
+
+    <label for="aiKey">API Key</label>
+    <input type="password" id="aiKey" placeholder="sk-..." />
+    <div class="hint" id="keyHint"></div>
+
+    <label for="aiModel">Model</label>
+    <input type="text" id="aiModel" list="modelList" placeholder="gemini-3.8-flash" />
+    <datalist id="modelList"></datalist>
+    <div class="hint" id="modelHint"></div>
+
+    <label for="aiSpeed">Kecepatan pengisian</label>
+    <select id="aiSpeed">
+      <option value="slow">🐢 Santai — mudah dipantau</option>
+      <option value="normal" selected>⚡ Normal</option>
+      <option value="fast">🚀 Cepat</option>
+    </select>
+
+    <div class="check">
+      <input type="checkbox" id="aiAutoSubmit" />
+      <span>Kirim otomatis setelah terisi</span>
+    </div>
+
+    <div class="row">
+      <button id="btnAnalyze" class="ghost">🔍 Analisis Form</button>
+      <button id="btnFill">🤖 Isi dengan AI</button>
+    </div>
+
+    <div class="hint" style="margin-top:10px">
+      Buka dulu tab berisi form. AI hanya membaca struktur form (label &amp; opsi),
+      lalu mengisinya satu per satu supaya mudah diverifikasi.
+    </div>
+    <div id="logAi" class="log"></div>
+  </section>
+
+  <!-- ================= TAB KONFIGURASI ================= -->
+  <section id="tab-cfg">
+    <label for="cfgUrl">Endpoint formResponse</label>
+    <input type="text" id="cfgUrl" />
+
+    <label for="cfgDelay">Jeda antar submit (detik)</label>
+    <input type="text" id="cfgDelay" />
+
+    <label for="cfgNama">Daftar Nama (JSON array)</label>
+    <textarea id="cfgNama" style="min-height:100px"></textarea>
+
+    <label for="cfgEmail">Daftar Email (JSON array)</label>
+    <textarea id="cfgEmail" style="min-height:100px"></textarea>
+
+    <label for="cfgStatic">Jawaban statis (JSON object)</label>
+    <textarea id="cfgStatic" style="min-height:80px"></textarea>
+
+    <label for="cfgEntry">Mapping entry ID (JSON object)</label>
+    <textarea id="cfgEntry" style="min-height:80px"></textarea>
+
+    <div class="row">
+      <button id="btnSaveCfg">💾 Simpan Konfigurasi</button>
+      <button id="btnWipe" class="ghost">🧹 Hapus Data Lokal</button>
+    </div>
+    <div class="hint" style="margin-top:10px">
+      Disimpan di <code>chrome.storage.local</code> (lokal, tidak dibagikan).
+      Tombol 🧹 menghapus SEMUA data tersimpan: API key, nama, email, endpoint.
+      Buka <a href="#" id="lnkOptions">pengaturan lanjutan</a> untuk provider AI lain.
+    </div>
+    <div id="logCfg" class="log"></div>
+  </section>
+
+  <script src="providers.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
