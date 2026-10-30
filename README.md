@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/icon128.png" width="72" alt="FormPilot AI logo">
+  <img src="icons/icon128.png" width="72" alt="FormPilot AI logo">
 </p>
 
 <h1 align="center">⚡ FormPilot AI</h1>
